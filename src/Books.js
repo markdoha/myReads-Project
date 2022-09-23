@@ -1,6 +1,11 @@
 import React from "react";
-
 const Book = ({ book, changeBookShelf }) => {
+  const coverImg =
+    book.imageLinks && book.imageLinks.thumbnail
+      ? book.imageLinks.thumbnail
+      : "https://via.placeholder.com/128x193?text=No%20Cover";
+  const bookTitle = book.title ? book.title : "No Title Available";
+  const bookAuthors = book.authors ? book.authors : ["No Author"];
   return (
     <div className="book">
       <div className="book-top">
@@ -9,7 +14,7 @@ const Book = ({ book, changeBookShelf }) => {
           style={{
             width: 128,
             height: 193,
-            backgroundImage: `url(${book.imageLinks.thumbnail})`,
+            backgroundImage: `url(${coverImg})`,
           }}
         />
         <div className="book-shelf-changer">
@@ -27,8 +32,8 @@ const Book = ({ book, changeBookShelf }) => {
           </select>
         </div>
       </div>
-      <div className="book-title">{book.title}</div>
-      <div className="book-authors">{book.publisher}</div>
+      <div className="book-title">{bookTitle}</div>
+      <div className="book-authors">{bookAuthors}</div>
     </div>
   );
 };
