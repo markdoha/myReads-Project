@@ -89,8 +89,6 @@ const BooksApp = () => {
           </Route>
           <Route path="/">
             <div className="list-books">
-              {console.log("SEARCH", searchBooks)}
-
               <div className="list-books-title">
                 <h1>MyReads</h1>
               </div>
