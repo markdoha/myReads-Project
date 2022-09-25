@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import Book from "./Books";
-import Shelves from "./AllShelves";
-import useQuery from "./Query";
+import AllShelves from "./components/AllShelves";
+import useQueryHook from "./components/useQueryHook";
+import BooksComponent from "./components/BooksComponent";
 import * as BooksAPI from "./BooksAPI";
 import "./App.css";
-
 
 const BooksApp = () => {
   const [books, setBooks] = useState([]);
   const [mapOfIdToBooks, setMapOfIdToBooks] = useState(new Map());
   const [mergedBooks, setMergedBooks] = useState([]);
   const [query, setQuery] = useState("");
-  const [searchBooks, setSearchBooks] = useQuery(query);
+  const [searchBooks, setSearchBooks] = useQueryHook(query);
 
   useEffect(() => {
     BooksAPI.getAll().then((data) => {
@@ -21,19 +20,16 @@ const BooksApp = () => {
     });
   }, []);
 
-  useEffect(
-    () => {
-      const combined = searchBooks.map((book) => {
-        if (mapOfIdToBooks.has(book.id)) {
-          return mapOfIdToBooks.get(book.id);
-        } else {
-          return book;
-        }
-      });
-      setMergedBooks(combined);
-    },
-    [searchBooks]
-  );
+  useEffect(() => {
+    const combined = searchBooks.map((book) => {
+      if (mapOfIdToBooks.has(book.id)) {
+        return mapOfIdToBooks.get(book.id);
+      } else {
+        return book;
+      }
+    });
+    setMergedBooks(combined);
+  }, [searchBooks]);
 
   const updateBookShelf = (book, To) => {
     const updatedBooks = books.map((b) => {
@@ -80,7 +76,10 @@ const BooksApp = () => {
                 <ol className="books-grid">
                   {mergedBooks.map((b) => (
                     <li key={b.id}>
-                      <Book book={b} changeBookShelf={updateBookShelf} />
+                      <BooksComponent
+                        book={b}
+                        changeBookShelf={updateBookShelf}
+                      />
                     </li>
                   ))}
                 </ol>
@@ -93,7 +92,7 @@ const BooksApp = () => {
                 <h1>MyReads</h1>
               </div>
               <div className="list-books-content">
-                <Shelves books={books} updateBookShelf={updateBookShelf} />
+                <AllShelves books={books} updateBookShelf={updateBookShelf} />
               </div>
               <div className="open-search">
                 <Link to="/search">

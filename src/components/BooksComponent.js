@@ -1,11 +1,13 @@
 import React from "react";
-const Book = ({ book, changeBookShelf }) => {
+
+const BooksComponent = ({ book, changeBookShelf }) => {
   const coverImg =
     book.imageLinks && book.imageLinks.thumbnail
       ? book.imageLinks.thumbnail
       : "https://via.placeholder.com/128x193?text=No%20Cover";
   const bookTitle = book.title ? book.title : "No Title Available";
   const bookAuthors = book.authors ? book.authors : ["No Author"];
+
   return (
     <div className="book">
       <div className="book-top">
@@ -38,4 +40,4 @@ const Book = ({ book, changeBookShelf }) => {
   );
 };
 
-export default Book;
+export default BooksComponent;
