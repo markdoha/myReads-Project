@@ -17,7 +17,7 @@ These instructions will allow you to get a copy of the project that runs on your
 
 Instructions to clone and run the project:
 
-1. In Terminal, clone the git project using `$ git clone https://github.com/kirollosatef/my-read-app`.
+1. In Terminal, clone the git project using `$ git clone https://github.com/markdoha/myReads-Project`.
 2. Navigate to the root directory for the project.
 3. Run the command `npm install` to install the necessary dependancies
 4. Run the command `npm start` to start the server. This will automatically open the website in your browser.
